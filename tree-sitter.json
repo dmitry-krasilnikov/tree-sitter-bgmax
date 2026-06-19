@@ -9,6 +9,7 @@
       "file-types": [
         "txt"
       ],
+      "highlights": "queries/highlights.scm",
       "injection-regex": "^bgmax$",
       "class-name": "TreeSitterBgmax"
     }
