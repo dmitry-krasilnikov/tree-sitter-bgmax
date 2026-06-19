@@ -10,8 +10,11 @@
           "name": "starting_record"
         },
         {
-          "type": "SYMBOL",
-          "name": "catch_all_lines"
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "section"
+          }
         },
         {
           "type": "SYMBOL",
@@ -48,10 +51,6 @@
         }
       ]
     },
-    "transaction_code": {
-      "type": "PATTERN",
-      "value": "[0-9]{2}"
-    },
     "layout_name": {
       "type": "PATTERN",
       "value": ".{20}"
@@ -74,6 +73,134 @@
         {
           "type": "STRING",
           "value": "P"
+        }
+      ]
+    },
+    "section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "opening_record"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "catch_all_lines"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "deposit_record"
+        }
+      ]
+    },
+    "opening_record": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "05"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "payee_bankgiro_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "payee_plusgiro_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "currency"
+        },
+        {
+          "type": "PATTERN",
+          "value": " {55}"
+        }
+      ]
+    },
+    "payee_bankgiro_number": {
+      "type": "PATTERN",
+      "value": "[0-9]{10}"
+    },
+    "payee_plusgiro_number": {
+      "type": "PATTERN",
+      "value": "[ a-zA-Z0-9]{10}"
+    },
+    "currency": {
+      "type": "PATTERN",
+      "value": "[ A-Z]{3}"
+    },
+    "deposit_record": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "15"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "payee_bank_account_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "payment_date"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "deposit_serial_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "deposit_amount"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "currency"
+        },
+        {
+          "type": "FIELD",
+          "name": "number_of_payments",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number_of"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_of_deposit"
+        }
+      ]
+    },
+    "payee_bank_account_number": {
+      "type": "PATTERN",
+      "value": "[0-9]{35}"
+    },
+    "payment_date": {
+      "type": "PATTERN",
+      "value": "[0-9]{8}"
+    },
+    "deposit_serial_number": {
+      "type": "PATTERN",
+      "value": "[0-9]{5}"
+    },
+    "deposit_amount": {
+      "type": "PATTERN",
+      "value": "[0-9]{18}"
+    },
+    "type_of_deposit": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "K"
+        },
+        {
+          "type": "STRING",
+          "value": "D"
+        },
+        {
+          "type": "STRING",
+          "value": " "
         }
       ]
     },
@@ -135,7 +262,7 @@
     },
     "catch_all": {
       "type": "PATTERN",
-      "value": "(05|2[0-9]|15).+"
+      "value": "2[0-9].{78}"
     }
   },
   "extras": [

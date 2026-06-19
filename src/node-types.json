@@ -15,6 +15,52 @@
     }
   },
   {
+    "type": "deposit_record",
+    "named": true,
+    "fields": {
+      "number_of_payments": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_of",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "currency",
+          "named": true
+        },
+        {
+          "type": "deposit_amount",
+          "named": true
+        },
+        {
+          "type": "deposit_serial_number",
+          "named": true
+        },
+        {
+          "type": "payee_bank_account_number",
+          "named": true
+        },
+        {
+          "type": "payment_date",
+          "named": true
+        },
+        {
+          "type": "type_of_deposit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "end_record",
     "named": true,
     "fields": {
@@ -61,9 +107,41 @@
     }
   },
   {
-    "type": "source_file",
+    "type": "number_of",
     "named": true,
-    "root": true,
+    "fields": {}
+  },
+  {
+    "type": "opening_record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "currency",
+          "named": true
+        },
+        {
+          "type": "payee_bankgiro_number",
+          "named": true
+        },
+        {
+          "type": "payee_plusgiro_number",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "payment_date",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "section",
+    "named": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -74,7 +152,31 @@
           "named": true
         },
         {
+          "type": "deposit_record",
+          "named": true
+        },
+        {
+          "type": "opening_record",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
           "type": "end_record",
+          "named": true
+        },
+        {
+          "type": "section",
           "named": true
         },
         {
@@ -117,11 +219,36 @@
     "fields": {}
   },
   {
+    "type": "type_of_deposit",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": " ",
+    "named": false
+  },
+  {
     "type": "01",
     "named": false
   },
   {
+    "type": "05",
+    "named": false
+  },
+  {
+    "type": "15",
+    "named": false
+  },
+  {
     "type": "70",
+    "named": false
+  },
+  {
+    "type": "D",
+    "named": false
+  },
+  {
+    "type": "K",
     "named": false
   },
   {
@@ -141,6 +268,18 @@
     "named": true
   },
   {
+    "type": "currency",
+    "named": true
+  },
+  {
+    "type": "deposit_amount",
+    "named": true
+  },
+  {
+    "type": "deposit_serial_number",
+    "named": true
+  },
+  {
     "type": "layout_name",
     "named": true
   },
@@ -149,7 +288,15 @@
     "named": true
   },
   {
-    "type": "number_of",
+    "type": "payee_bank_account_number",
+    "named": true
+  },
+  {
+    "type": "payee_bankgiro_number",
+    "named": true
+  },
+  {
+    "type": "payee_plusgiro_number",
     "named": true
   }
 ]
