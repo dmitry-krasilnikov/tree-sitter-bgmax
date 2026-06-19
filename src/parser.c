@@ -35,11 +35,11 @@ enum ts_symbol_identifiers {
   sym_creation_timestamp = 5,
   anon_sym_T = 6,
   anon_sym_P = 7,
-  anon_sym_05 = 8,
-  aux_sym_opening_record_token1 = 9,
-  sym_payee_bankgiro_number = 10,
-  sym_payee_plusgiro_number = 11,
-  sym_currency = 12,
+  sym_currency_code = 8,
+  anon_sym_05 = 9,
+  aux_sym_opening_record_token1 = 10,
+  sym_payee_bankgiro_number = 11,
+  sym_payee_plusgiro_number = 12,
   anon_sym_15 = 13,
   sym_payee_bank_account_number = 14,
   aux_sym_payment_date_token1 = 15,
@@ -75,11 +75,11 @@ static const char * const ts_symbol_names[] = {
   [sym_creation_timestamp] = "creation_timestamp",
   [anon_sym_T] = "T",
   [anon_sym_P] = "P",
+  [sym_currency_code] = "currency_code",
   [anon_sym_05] = "05",
   [aux_sym_opening_record_token1] = "opening_record_token1",
   [sym_payee_bankgiro_number] = "payee_bankgiro_number",
   [sym_payee_plusgiro_number] = "payee_plusgiro_number",
-  [sym_currency] = "currency",
   [anon_sym_15] = "15",
   [sym_payee_bank_account_number] = "payee_bank_account_number",
   [aux_sym_payment_date_token1] = "payment_date_token1",
@@ -115,11 +115,11 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_creation_timestamp] = sym_creation_timestamp,
   [anon_sym_T] = anon_sym_T,
   [anon_sym_P] = anon_sym_P,
+  [sym_currency_code] = sym_currency_code,
   [anon_sym_05] = anon_sym_05,
   [aux_sym_opening_record_token1] = aux_sym_opening_record_token1,
   [sym_payee_bankgiro_number] = sym_payee_bankgiro_number,
   [sym_payee_plusgiro_number] = sym_payee_plusgiro_number,
-  [sym_currency] = sym_currency,
   [anon_sym_15] = anon_sym_15,
   [sym_payee_bank_account_number] = sym_payee_bank_account_number,
   [aux_sym_payment_date_token1] = aux_sym_payment_date_token1,
@@ -179,6 +179,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
+  [sym_currency_code] = {
+    .visible = true,
+    .named = true,
+  },
   [anon_sym_05] = {
     .visible = true,
     .named = false,
@@ -192,10 +196,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = true,
   },
   [sym_payee_plusgiro_number] = {
-    .visible = true,
-    .named = true,
-  },
-  [sym_currency] = {
     .visible = true,
     .named = true,
   },
@@ -541,24 +541,24 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('\t' <= lookahead && lookahead <= '\r')) SKIP(23);
       END_STATE();
     case 24:
-      if (lookahead == ' ') ADVANCE(635);
+      if (lookahead == ' ') ADVANCE(621);
       if (('\t' <= lookahead && lookahead <= '\r')) SKIP(34);
-      if (('A' <= lookahead && lookahead <= 'Z')) ADVANCE(637);
+      if (('A' <= lookahead && lookahead <= 'Z')) ADVANCE(623);
       END_STATE();
     case 25:
       if (lookahead == ' ') ADVANCE(592);
       if (('\t' <= lookahead && lookahead <= '\r')) SKIP(139);
       END_STATE();
     case 26:
-      if (lookahead == ' ') ADVANCE(621);
+      if (lookahead == ' ') ADVANCE(625);
       if (('\t' <= lookahead && lookahead <= '\r')) SKIP(172);
       END_STATE();
     case 27:
-      if (lookahead == ' ') ADVANCE(624);
+      if (lookahead == ' ') ADVANCE(628);
       if (('\t' <= lookahead && lookahead <= '\r')) SKIP(64);
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(633);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(637);
       END_STATE();
     case 28:
       if (lookahead == ' ') ADVANCE(647);
@@ -1174,7 +1174,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 174:
       if (lookahead == '1') ADVANCE(591);
-      if (lookahead == '5') ADVANCE(620);
+      if (lookahead == '5') ADVANCE(624);
       END_STATE();
     case 175:
       if (lookahead == '5') ADVANCE(638);
@@ -1228,7 +1228,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('0' <= lookahead && lookahead <= '9')) ADVANCE(617);
       END_STATE();
     case 188:
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(622);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(626);
       END_STATE();
     case 189:
       if (('0' <= lookahead && lookahead <= '9')) ADVANCE(183);
@@ -1484,11 +1484,11 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 273:
       if (lookahead == ' ' ||
-          ('A' <= lookahead && lookahead <= 'Z')) ADVANCE(634);
+          ('A' <= lookahead && lookahead <= 'Z')) ADVANCE(620);
       END_STATE();
     case 274:
       if (lookahead == ' ' ||
-          ('A' <= lookahead && lookahead <= 'Z')) ADVANCE(636);
+          ('A' <= lookahead && lookahead <= 'Z')) ADVANCE(622);
       END_STATE();
     case 275:
       if (lookahead == ' ' ||
@@ -1498,13 +1498,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(623);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(627);
       END_STATE();
     case 277:
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(625);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(629);
       END_STATE();
     case 278:
       if (lookahead == ' ' ||
@@ -1522,7 +1522,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(626);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(630);
       END_STATE();
     case 281:
       if (lookahead == ' ' ||
@@ -1552,7 +1552,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(627);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(631);
       END_STATE();
     case 286:
       if (lookahead == ' ' ||
@@ -1594,7 +1594,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(628);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(632);
       END_STATE();
     case 293:
       if (lookahead == ' ' ||
@@ -1648,7 +1648,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(629);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(633);
       END_STATE();
     case 302:
       if (lookahead == ' ' ||
@@ -1696,7 +1696,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(630);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(634);
       END_STATE();
     case 310:
       if (lookahead == ' ' ||
@@ -1732,7 +1732,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(631);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(635);
       END_STATE();
     case 316:
       if (lookahead == ' ' ||
@@ -1756,7 +1756,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(632);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(636);
       END_STATE();
     case 320:
       if (lookahead == ' ' ||
@@ -2982,59 +2982,49 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_P);
       END_STATE();
     case 620:
-      ACCEPT_TOKEN(anon_sym_05);
+      ACCEPT_TOKEN(sym_currency_code);
       END_STATE();
     case 621:
-      ACCEPT_TOKEN(aux_sym_opening_record_token1);
+      ACCEPT_TOKEN(sym_currency_code);
       if (lookahead == ' ') ADVANCE(621);
+      if (('A' <= lookahead && lookahead <= 'Z')) ADVANCE(623);
       END_STATE();
     case 622:
-      ACCEPT_TOKEN(sym_payee_bankgiro_number);
+      ACCEPT_TOKEN(sym_currency_code);
+      if (lookahead == ' ' ||
+          ('A' <= lookahead && lookahead <= 'Z')) ADVANCE(620);
       END_STATE();
     case 623:
-      ACCEPT_TOKEN(sym_payee_plusgiro_number);
+      ACCEPT_TOKEN(sym_currency_code);
+      if (lookahead == ' ' ||
+          ('A' <= lookahead && lookahead <= 'Z')) ADVANCE(622);
       END_STATE();
     case 624:
-      ACCEPT_TOKEN(sym_payee_plusgiro_number);
-      if (lookahead == ' ') ADVANCE(624);
-      if (('0' <= lookahead && lookahead <= '9') ||
-          ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(633);
+      ACCEPT_TOKEN(anon_sym_05);
       END_STATE();
     case 625:
-      ACCEPT_TOKEN(sym_payee_plusgiro_number);
-      if (lookahead == ' ' ||
-          ('0' <= lookahead && lookahead <= '9') ||
-          ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(623);
+      ACCEPT_TOKEN(aux_sym_opening_record_token1);
+      if (lookahead == ' ') ADVANCE(625);
       END_STATE();
     case 626:
-      ACCEPT_TOKEN(sym_payee_plusgiro_number);
-      if (lookahead == ' ' ||
-          ('0' <= lookahead && lookahead <= '9') ||
-          ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(625);
+      ACCEPT_TOKEN(sym_payee_bankgiro_number);
       END_STATE();
     case 627:
       ACCEPT_TOKEN(sym_payee_plusgiro_number);
-      if (lookahead == ' ' ||
-          ('0' <= lookahead && lookahead <= '9') ||
-          ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(626);
       END_STATE();
     case 628:
       ACCEPT_TOKEN(sym_payee_plusgiro_number);
-      if (lookahead == ' ' ||
-          ('0' <= lookahead && lookahead <= '9') ||
+      if (lookahead == ' ') ADVANCE(628);
+      if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(627);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(637);
       END_STATE();
     case 629:
       ACCEPT_TOKEN(sym_payee_plusgiro_number);
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(628);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(627);
       END_STATE();
     case 630:
       ACCEPT_TOKEN(sym_payee_plusgiro_number);
@@ -3065,22 +3055,32 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(632);
       END_STATE();
     case 634:
-      ACCEPT_TOKEN(sym_currency);
+      ACCEPT_TOKEN(sym_payee_plusgiro_number);
+      if (lookahead == ' ' ||
+          ('0' <= lookahead && lookahead <= '9') ||
+          ('A' <= lookahead && lookahead <= 'Z') ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(633);
       END_STATE();
     case 635:
-      ACCEPT_TOKEN(sym_currency);
-      if (lookahead == ' ') ADVANCE(635);
-      if (('A' <= lookahead && lookahead <= 'Z')) ADVANCE(637);
+      ACCEPT_TOKEN(sym_payee_plusgiro_number);
+      if (lookahead == ' ' ||
+          ('0' <= lookahead && lookahead <= '9') ||
+          ('A' <= lookahead && lookahead <= 'Z') ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(634);
       END_STATE();
     case 636:
-      ACCEPT_TOKEN(sym_currency);
+      ACCEPT_TOKEN(sym_payee_plusgiro_number);
       if (lookahead == ' ' ||
-          ('A' <= lookahead && lookahead <= 'Z')) ADVANCE(634);
+          ('0' <= lookahead && lookahead <= '9') ||
+          ('A' <= lookahead && lookahead <= 'Z') ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(635);
       END_STATE();
     case 637:
-      ACCEPT_TOKEN(sym_currency);
+      ACCEPT_TOKEN(sym_payee_plusgiro_number);
       if (lookahead == ' ' ||
-          ('A' <= lookahead && lookahead <= 'Z')) ADVANCE(636);
+          ('0' <= lookahead && lookahead <= '9') ||
+          ('A' <= lookahead && lookahead <= 'Z') ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(636);
       END_STATE();
     case 638:
       ACCEPT_TOKEN(anon_sym_15);
@@ -3309,7 +3309,7 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_70,
   [163] = 1,
     ACTIONS(51), 1,
-      sym_currency,
+      sym_currency_code,
   [167] = 1,
     ACTIONS(53), 1,
       ts_builtin_sym_end,
@@ -3342,7 +3342,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_deposit_serial_number,
   [207] = 1,
     ACTIONS(73), 1,
-      sym_currency,
+      sym_currency_code,
   [211] = 1,
     ACTIONS(75), 1,
       sym_deposit_amount,

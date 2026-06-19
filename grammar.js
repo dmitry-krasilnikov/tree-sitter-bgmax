@@ -41,11 +41,14 @@ export default grammar({
       $.deposit_record
     ),
 
+    // TODO: try to figure out why section parsing breaks when the pattern does not include whitespace char
+    currency_code: $ => /[ A-Z]{3}/,
+
     opening_record: $ => seq(
       '05',
       $.payee_bankgiro_number,
       $.payee_plusgiro_number,
-      $.currency,
+      $.currency_code,
       / {55}/
     ),
 
@@ -53,16 +56,13 @@ export default grammar({
 
     payee_plusgiro_number: $ => /[ a-zA-Z0-9]{10}/,
 
-    // TODO: try to figure out why section parsing breaks when the pattern does not include whitespace char
-    currency: $ => /[ A-Z]{3}/,
-
     deposit_record: $ => seq(
       '15',
       $.payee_bank_account_number,
       $.payment_date,
       $.deposit_serial_number,
       $.deposit_amount,
-      $.currency,
+      $.currency_code,
       field('number_of_payments', $.number_of),
       $.type_of_deposit,
     ),

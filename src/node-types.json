@@ -34,7 +34,7 @@
       "required": true,
       "types": [
         {
-          "type": "currency",
+          "type": "currency_code",
           "named": true
         },
         {
@@ -120,7 +120,7 @@
       "required": true,
       "types": [
         {
-          "type": "currency",
+          "type": "currency_code",
           "named": true
         },
         {
@@ -268,7 +268,7 @@
     "named": true
   },
   {
-    "type": "currency",
+    "type": "currency_code",
     "named": true
   },
   {
