@@ -3,8 +3,139 @@
   "name": "bgmax",
   "rules": {
     "source_file": {
-      "type": "STRING",
-      "value": "hello"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "starting_record"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "catch_all_lines"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "end_record"
+        }
+      ]
+    },
+    "starting_record": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "01"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "layout_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "layout_version"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "creation_timestamp"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "test_indicator"
+        },
+        {
+          "type": "PATTERN",
+          "value": " {35}"
+        }
+      ]
+    },
+    "transaction_code": {
+      "type": "PATTERN",
+      "value": "[0-9]{2}"
+    },
+    "layout_name": {
+      "type": "PATTERN",
+      "value": ".{20}"
+    },
+    "layout_version": {
+      "type": "PATTERN",
+      "value": ".{2}"
+    },
+    "creation_timestamp": {
+      "type": "PATTERN",
+      "value": "[0-9]{20}"
+    },
+    "test_indicator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "T"
+        },
+        {
+          "type": "STRING",
+          "value": "P"
+        }
+      ]
+    },
+    "end_record": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "70"
+        },
+        {
+          "type": "FIELD",
+          "name": "number_of_payment_records",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number_of"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "number_of_deduction_records",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number_of"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "number_of_extra_reference_records",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number_of"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "number_of_deposit_records",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number_of"
+          }
+        },
+        {
+          "type": "PATTERN",
+          "value": " {46}"
+        }
+      ]
+    },
+    "number_of": {
+      "type": "PATTERN",
+      "value": "[0-9]{8}"
+    },
+    "catch_all_lines": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "catch_all"
+      }
+    },
+    "catch_all": {
+      "type": "PATTERN",
+      "value": "(05|2[0-9]|15).+"
     }
   },
   "extras": [

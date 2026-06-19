@@ -1,12 +1,155 @@
 [
   {
+    "type": "catch_all_lines",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "catch_all",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "end_record",
+    "named": true,
+    "fields": {
+      "number_of_deduction_records": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_of",
+            "named": true
+          }
+        ]
+      },
+      "number_of_deposit_records": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_of",
+            "named": true
+          }
+        ]
+      },
+      "number_of_extra_reference_records": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_of",
+            "named": true
+          }
+        ]
+      },
+      "number_of_payment_records": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_of",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "catch_all_lines",
+          "named": true
+        },
+        {
+          "type": "end_record",
+          "named": true
+        },
+        {
+          "type": "starting_record",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "starting_record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "creation_timestamp",
+          "named": true
+        },
+        {
+          "type": "layout_name",
+          "named": true
+        },
+        {
+          "type": "layout_version",
+          "named": true
+        },
+        {
+          "type": "test_indicator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "test_indicator",
+    "named": true,
     "fields": {}
   },
   {
-    "type": "hello",
+    "type": "01",
     "named": false
+  },
+  {
+    "type": "70",
+    "named": false
+  },
+  {
+    "type": "P",
+    "named": false
+  },
+  {
+    "type": "T",
+    "named": false
+  },
+  {
+    "type": "catch_all",
+    "named": true
+  },
+  {
+    "type": "creation_timestamp",
+    "named": true
+  },
+  {
+    "type": "layout_name",
+    "named": true
+  },
+  {
+    "type": "layout_version",
+    "named": true
+  },
+  {
+    "type": "number_of",
+    "named": true
   }
 ]
