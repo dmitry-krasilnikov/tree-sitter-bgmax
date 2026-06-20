@@ -109,8 +109,16 @@
           "name": "payee_bankgiro_number"
         },
         {
-          "type": "SYMBOL",
-          "name": "payee_plusgiro_number"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "payee_plusgiro_number"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -125,10 +133,6 @@
     "payee_bankgiro_number": {
       "type": "PATTERN",
       "value": "[0-9]{10}"
-    },
-    "payee_plusgiro_number": {
-      "type": "PATTERN",
-      "value": "[ a-zA-Z0-9]{10}"
     },
     "deposit_record": {
       "type": "SEQ",
@@ -273,7 +277,12 @@
   ],
   "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "payee_plusgiro_number"
+    }
+  ],
   "inline": [],
   "supertypes": [],
   "reserved": {}

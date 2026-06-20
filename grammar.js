@@ -10,6 +10,8 @@
 export default grammar({
   name: "bgmax",
 
+  externals: $ => [$.payee_plusgiro_number],
+
   rules: {
     // TODO: figure out if it's possible to handle ISO-8859-1 encoding
     source_file: $ => seq(
@@ -53,8 +55,6 @@ export default grammar({
     ),
 
     payee_bankgiro_number: $ => /[0-9]{10}/,
-
-    payee_plusgiro_number: $ => /[ a-zA-Z0-9]{10}/,
 
     deposit_record: $ => seq(
       '15',
