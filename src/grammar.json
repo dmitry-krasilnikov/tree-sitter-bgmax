@@ -395,6 +395,67 @@
         }
       ]
     },
+    "extra_reference_number_record": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "2[2-3]"
+        },
+        {
+          "type": "FIELD",
+          "name": "payer_bankgiro_number",
+          "content": {
+            "type": "SYMBOL",
+            "name": "bankgiro_number"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "reference"
+        },
+        {
+          "type": "FIELD",
+          "name": "payment_amount",
+          "content": {
+            "type": "SYMBOL",
+            "name": "amount"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "reference_code",
+          "content": {
+            "type": "SYMBOL",
+            "name": "single_digit_code"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "payment_channel_code",
+          "content": {
+            "type": "SYMBOL",
+            "name": "single_digit_code"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "bgc_serial_number"
+        },
+        {
+          "type": "FIELD",
+          "name": "image_marking",
+          "content": {
+            "type": "SYMBOL",
+            "name": "single_digit_code"
+          }
+        },
+        {
+          "type": "PATTERN",
+          "value": " {10}"
+        }
+      ]
+    },
     "catch_all_lines": {
       "type": "REPEAT1",
       "content": {
@@ -410,6 +471,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "extra_reference_number_record"
+          },
+          {
+            "type": "SYMBOL",
             "name": "catch_all"
           }
         ]
@@ -417,7 +482,7 @@
     },
     "catch_all": {
       "type": "PATTERN",
-      "value": "2[2-9].{78}"
+      "value": "2[4-9].{78}"
     }
   },
   "extras": [
