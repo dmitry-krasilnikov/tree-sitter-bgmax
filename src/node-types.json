@@ -12,7 +12,91 @@
           "named": true
         },
         {
+          "type": "deduction_record",
+          "named": true
+        },
+        {
           "type": "payment_record",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "deduction_record",
+    "named": true,
+    "fields": {
+      "deduction_code": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "single_digit_code",
+            "named": true
+          }
+        ]
+      },
+      "image_marking": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "single_digit_code",
+            "named": true
+          }
+        ]
+      },
+      "payer_bankgiro_number": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "bankgiro_number",
+            "named": true
+          }
+        ]
+      },
+      "payment_amount": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "amount",
+            "named": true
+          }
+        ]
+      },
+      "payment_channel_code": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "single_digit_code",
+            "named": true
+          }
+        ]
+      },
+      "reference_code": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "single_digit_code",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bgc_serial_number",
+          "named": true
+        },
+        {
+          "type": "reference",
           "named": true
         }
       ]
@@ -328,6 +412,10 @@
   },
   {
     "type": "20",
+    "named": false
+  },
+  {
+    "type": "21",
     "named": false
   },
   {

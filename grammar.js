@@ -104,8 +104,21 @@ export default grammar({
       / {10}/
     ),
 
-    catch_all_lines: $ => repeat1(choice($.payment_record, $.catch_all)),
+    deduction_record: $ => seq(
+      '21',
+      field('payer_bankgiro_number', $.bankgiro_number),
+      $.reference,
+      field('payment_amount', $.amount),
+      field('reference_code', $.single_digit_code),
+      field('payment_channel_code', $.single_digit_code),
+      $.bgc_serial_number,
+      field('image_marking', $.single_digit_code),
+      field('deduction_code', $.single_digit_code),
+      / {9}/
+    ),
 
-    catch_all: $=> /2[1-9].{78}/
+    catch_all_lines: $ => repeat1(choice($.payment_record, $.deduction_record, $.catch_all)),
+
+    catch_all: $=> /2[2-9].{78}/
   }
 });
