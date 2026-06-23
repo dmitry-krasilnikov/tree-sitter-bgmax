@@ -90,35 +90,11 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "payment_record"
+                "name": "payment"
               },
               {
                 "type": "SYMBOL",
-                "name": "deduction_record"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "extra_reference_number_record"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "payment_information_record"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "name_record"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "address_record_1"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "address_record_2"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "company_number_record"
+                "name": "deduction"
               }
             ]
           }
@@ -126,6 +102,148 @@
         {
           "type": "SYMBOL",
           "name": "section_deposit_record"
+        }
+      ]
+    },
+    "payment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "payment_record"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "extra_reference_number_record"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "payment_information_record"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "name_record"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "address_record_1"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "address_record_2"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "company_number_record"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "deduction": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "deduction_record"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "extra_reference_number_record"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "payment_information_record"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "name_record"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "address_record_1"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "address_record_2"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "company_number_record"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

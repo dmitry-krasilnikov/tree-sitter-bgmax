@@ -39,8 +39,28 @@ export default grammar({
 
     section: $ => seq(
       $.section_opening_record,
-      repeat1(choice($.payment_record, $.deduction_record, $.extra_reference_number_record, $.payment_information_record, $.name_record, $.address_record_1, $.address_record_2, $.company_number_record)),
+      repeat1(choice($.payment, $.deduction)),
       $.section_deposit_record
+    ),
+
+    payment: $ => seq(
+      $.payment_record,
+      repeat($.extra_reference_number_record),
+      repeat($.payment_information_record),
+      optional($.name_record),
+      optional($.address_record_1),
+      optional($.address_record_2),
+      optional($.company_number_record)
+    ),
+
+    deduction: $ => seq(
+      $.deduction_record,
+      repeat($.extra_reference_number_record),
+      repeat($.payment_information_record),
+      optional($.name_record),
+      optional($.address_record_1),
+      optional($.address_record_2),
+      optional($.company_number_record)
     ),
 
     // TODO: try to figure out why section parsing breaks when the pattern does not include whitespace char

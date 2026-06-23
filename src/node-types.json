@@ -78,6 +78,45 @@
     }
   },
   {
+    "type": "deduction",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "address_record_1",
+          "named": true
+        },
+        {
+          "type": "address_record_2",
+          "named": true
+        },
+        {
+          "type": "company_number_record",
+          "named": true
+        },
+        {
+          "type": "deduction_record",
+          "named": true
+        },
+        {
+          "type": "extra_reference_number_record",
+          "named": true
+        },
+        {
+          "type": "name_record",
+          "named": true
+        },
+        {
+          "type": "payment_information_record",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "deduction_record",
     "named": true,
     "fields": {
@@ -344,6 +383,45 @@
     "fields": {}
   },
   {
+    "type": "payment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "address_record_1",
+          "named": true
+        },
+        {
+          "type": "address_record_2",
+          "named": true
+        },
+        {
+          "type": "company_number_record",
+          "named": true
+        },
+        {
+          "type": "extra_reference_number_record",
+          "named": true
+        },
+        {
+          "type": "name_record",
+          "named": true
+        },
+        {
+          "type": "payment_information_record",
+          "named": true
+        },
+        {
+          "type": "payment_record",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "payment_date",
     "named": true,
     "fields": {}
@@ -448,35 +526,11 @@
       "required": true,
       "types": [
         {
-          "type": "address_record_1",
+          "type": "deduction",
           "named": true
         },
         {
-          "type": "address_record_2",
-          "named": true
-        },
-        {
-          "type": "company_number_record",
-          "named": true
-        },
-        {
-          "type": "deduction_record",
-          "named": true
-        },
-        {
-          "type": "extra_reference_number_record",
-          "named": true
-        },
-        {
-          "type": "name_record",
-          "named": true
-        },
-        {
-          "type": "payment_information_record",
-          "named": true
-        },
-        {
-          "type": "payment_record",
+          "type": "payment",
           "named": true
         },
         {
