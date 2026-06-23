@@ -1,5 +1,6 @@
 (creation_timestamp) @constant
-(payee_bankgiro_number) @attribute
+(section_opening_record payee_bankgiro_number: (bankgiro_number) @attribute)
 (payee_plusgiro_number) @operator
 (currency_code) @variable
-(deposit_amount) @keyword
+(section_deposit_record (payment_date)) @constant
+(section_deposit_record deposit_amount: (amount)) @keyword
