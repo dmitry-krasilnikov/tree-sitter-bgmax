@@ -10,17 +10,17 @@
 export default grammar({
   name: "bgmax",
 
-  externals: $ => [$.payee_plusgiro_number],
+  externals: $ => [$.payee_plusgiro_number, $.reference],
 
   rules: {
     // TODO: figure out if it's possible to handle ISO-8859-1 encoding
     source_file: $ => seq(
-      $.starting_record,
+      $.file_opening_record,
       repeat1($.section),
-      $.end_record
+      $.file_end_record
     ),
 
-    starting_record: $ => seq(
+    file_opening_record: $ => seq(
       '01',
       $.layout_name,
       $.layout_version,
@@ -38,30 +38,30 @@ export default grammar({
     test_indicator: $ => choice('T', 'P'),
 
     section: $ => seq(
-      $.opening_record,
+      $.section_opening_record,
       $.catch_all_lines,
-      $.deposit_record
+      $.section_deposit_record
     ),
 
     // TODO: try to figure out why section parsing breaks when the pattern does not include whitespace char
     currency_code: $ => /[ A-Z]{3}/,
 
-    opening_record: $ => seq(
+    section_opening_record: $ => seq(
       '05',
-      $.payee_bankgiro_number,
+      field('payee_bankgiro_number', $.bankgiro_number),
       $.payee_plusgiro_number,
       $.currency_code,
       / {55}/
     ),
 
-    payee_bankgiro_number: $ => /[0-9]{10}/,
+    bankgiro_number: $ => /[0-9]{10}/,
 
-    deposit_record: $ => seq(
+    section_deposit_record: $ => seq(
       '15',
       $.payee_bank_account_number,
       $.payment_date,
       $.deposit_serial_number,
-      $.deposit_amount,
+      field('deposit_amount', $.amount),
       $.currency_code,
       field('number_of_payments', $.number_of),
       $.type_of_deposit,
@@ -73,11 +73,11 @@ export default grammar({
 
     deposit_serial_number: $ => /[0-9]{5}/,
 
-    deposit_amount: $ => /[0-9]{18}/,
+    amount: $ => /[0-9]{18}/,
 
     type_of_deposit: $ => choice('K', 'D', ' '),
 
-    end_record: $ => seq(
+    file_end_record: $ => seq(
       '70',
       field('number_of_payment_records', $.number_of),
       field('number_of_deduction_records', $.number_of),
@@ -88,8 +88,24 @@ export default grammar({
 
     number_of: $ => /[0-9]{8}/,
 
-    catch_all_lines: $ => repeat1($.catch_all),
+    single_digit_code: $ => /[0-9]{1}/,
 
-    catch_all: $=> /2[0-9].{78}/
+    bgc_serial_number: $ => /[0-9]{12}/,
+
+    payment_record: $ => seq(
+      '20',
+      field('payer_bankgiro_number', $.bankgiro_number),
+      $.reference,
+      field('payment_amount', $.amount),
+      field('reference_code', $.single_digit_code),
+      field('payment_channel_code', $.single_digit_code),
+      $.bgc_serial_number,
+      field('image_marking', $.single_digit_code),
+      / {10}/
+    ),
+
+    catch_all_lines: $ => repeat1(choice($.payment_record, $.catch_all)),
+
+    catch_all: $=> /2[1-9].{78}/
   }
 });

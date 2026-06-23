@@ -4,6 +4,7 @@
 
 enum TokenType {
     PAYEE_PLUSGIRO_NUMBER,
+    REFERENCE,
 };
 
 void * tree_sitter_bgmax_external_scanner_create() {
@@ -36,5 +37,12 @@ bool tree_sitter_bgmax_external_scanner_scan(
         }
         lexer->result_symbol = PAYEE_PLUSGIRO_NUMBER;
         return true;
+    } else if (valid_symbols[REFERENCE]) {
+        for (int i = 0; i < 25; i++) {
+            lexer->advance(lexer, false);
+        }
+        lexer->result_symbol = REFERENCE;
+        return true;
     }
+    return false;
 }
