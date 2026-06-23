@@ -10,7 +10,7 @@
 export default grammar({
   name: "bgmax",
 
-  externals: $ => [$.payee_plusgiro_number, $.reference, $.information_text, $.payer_name],
+  externals: $ => [$.payee_plusgiro_number, $.reference, $.information_text, $.payer_info, $.payer_post_code, $.payer_country_code],
 
   rules: {
     // TODO: figure out if it's possible to handle ISO-8859-1 encoding
@@ -39,7 +39,7 @@ export default grammar({
 
     section: $ => seq(
       $.section_opening_record,
-      $.catch_all_lines,
+      repeat1(choice($.payment_record, $.deduction_record, $.extra_reference_number_record, $.payment_information_record, $.name_record, $.address_record_1, $.address_record_2, $.company_number_record)),
       $.section_deposit_record
     ),
 
@@ -90,7 +90,7 @@ export default grammar({
 
     single_digit_code: $ => /[0-9]{1}/,
 
-    bgc_serial_number: $ => /[0-9]{12}/,
+    long_numeric_field: $ => /[0-9]{12}/,
 
     payment_record: $ => seq(
       '20',
@@ -99,7 +99,7 @@ export default grammar({
       field('payment_amount', $.amount),
       field('reference_code', $.single_digit_code),
       field('payment_channel_code', $.single_digit_code),
-      $.bgc_serial_number,
+      field('bgc_serial_number', $.long_numeric_field),
       field('image_marking', $.single_digit_code),
       / {10}/
     ),
@@ -111,7 +111,7 @@ export default grammar({
       field('payment_amount', $.amount),
       field('reference_code', $.single_digit_code),
       field('payment_channel_code', $.single_digit_code),
-      $.bgc_serial_number,
+      field('bgc_serial_number', $.long_numeric_field),
       field('image_marking', $.single_digit_code),
       field('deduction_code', $.single_digit_code),
       / {9}/
@@ -124,7 +124,7 @@ export default grammar({
       field('payment_amount', $.amount),
       field('reference_code', $.single_digit_code),
       field('payment_channel_code', $.single_digit_code),
-      $.bgc_serial_number,
+      field('bgc_serial_number', $.long_numeric_field),
       field('image_marking', $.single_digit_code),
       / {10}/
     ),
@@ -137,13 +137,30 @@ export default grammar({
 
     name_record: $ => seq(
       '26',
-      field('payer_name', $.payer_name),
-      field('extra_name_field', $.payer_name),
+      field('payer_name', $.payer_info),
+      field('extra_name_field', $.payer_info),
       / {8}/
     ),
 
-    catch_all_lines: $ => repeat1(choice($.payment_record, $.deduction_record, $.extra_reference_number_record, $.payment_information_record, $.name_record, $.catch_all)),
+    address_record_1: $ => seq(
+      '27',
+      field('payer_address', $.payer_info),
+      $.payer_post_code,
+      / {34}/
+    ),
 
-    catch_all: $=> /2[7-9].{78}/
+    address_record_2: $ => seq(
+      '28',
+      field('payer_town', $.payer_info),
+      field('payer_country', $.payer_info),
+      $.payer_country_code,
+      / {6}/
+    ),
+
+    company_number_record: $ => seq(
+      '29',
+      field('company_number', $.long_numeric_field),
+      / {66}/
+    ),
   }
 });

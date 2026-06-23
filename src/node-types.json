@@ -1,43 +1,96 @@
 [
   {
-    "type": "catch_all_lines",
+    "type": "address_record_1",
     "named": true,
-    "fields": {},
+    "fields": {
+      "payer_address": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "payer_info",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "catch_all",
-          "named": true
-        },
-        {
-          "type": "deduction_record",
-          "named": true
-        },
-        {
-          "type": "extra_reference_number_record",
-          "named": true
-        },
-        {
-          "type": "name_record",
-          "named": true
-        },
-        {
-          "type": "payment_information_record",
-          "named": true
-        },
-        {
-          "type": "payment_record",
+          "type": "payer_post_code",
           "named": true
         }
       ]
     }
   },
   {
+    "type": "address_record_2",
+    "named": true,
+    "fields": {
+      "payer_country": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "payer_info",
+            "named": true
+          }
+        ]
+      },
+      "payer_town": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "payer_info",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "payer_country_code",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "company_number_record",
+    "named": true,
+    "fields": {
+      "company_number": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "long_numeric_field",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "deduction_record",
     "named": true,
     "fields": {
+      "bgc_serial_number": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "long_numeric_field",
+            "named": true
+          }
+        ]
+      },
       "deduction_code": {
         "multiple": false,
         "required": true,
@@ -100,13 +153,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "bgc_serial_number",
-          "named": true
-        },
         {
           "type": "reference",
           "named": true
@@ -118,6 +167,16 @@
     "type": "extra_reference_number_record",
     "named": true,
     "fields": {
+      "bgc_serial_number": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "long_numeric_field",
+            "named": true
+          }
+        ]
+      },
       "image_marking": {
         "multiple": false,
         "required": true,
@@ -170,13 +229,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "bgc_serial_number",
-          "named": true
-        },
         {
           "type": "reference",
           "named": true
@@ -266,7 +321,7 @@
         "required": true,
         "types": [
           {
-            "type": "payer_name",
+            "type": "payer_info",
             "named": true
           }
         ]
@@ -276,7 +331,7 @@
         "required": true,
         "types": [
           {
-            "type": "payer_name",
+            "type": "payer_info",
             "named": true
           }
         ]
@@ -312,6 +367,16 @@
     "type": "payment_record",
     "named": true,
     "fields": {
+      "bgc_serial_number": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "long_numeric_field",
+            "named": true
+          }
+        ]
+      },
       "image_marking": {
         "multiple": false,
         "required": true,
@@ -364,13 +429,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "bgc_serial_number",
-          "named": true
-        },
         {
           "type": "reference",
           "named": true
@@ -387,7 +448,35 @@
       "required": true,
       "types": [
         {
-          "type": "catch_all_lines",
+          "type": "address_record_1",
+          "named": true
+        },
+        {
+          "type": "address_record_2",
+          "named": true
+        },
+        {
+          "type": "company_number_record",
+          "named": true
+        },
+        {
+          "type": "deduction_record",
+          "named": true
+        },
+        {
+          "type": "extra_reference_number_record",
+          "named": true
+        },
+        {
+          "type": "name_record",
+          "named": true
+        },
+        {
+          "type": "payment_information_record",
+          "named": true
+        },
+        {
+          "type": "payment_record",
           "named": true
         },
         {
@@ -550,6 +639,18 @@
     "named": false
   },
   {
+    "type": "27",
+    "named": false
+  },
+  {
+    "type": "28",
+    "named": false
+  },
+  {
+    "type": "29",
+    "named": false
+  },
+  {
     "type": "70",
     "named": false
   },
@@ -578,14 +679,6 @@
     "named": true
   },
   {
-    "type": "bgc_serial_number",
-    "named": true
-  },
-  {
-    "type": "catch_all",
-    "named": true
-  },
-  {
     "type": "creation_timestamp",
     "named": true
   },
@@ -610,6 +703,10 @@
     "named": true
   },
   {
+    "type": "long_numeric_field",
+    "named": true
+  },
+  {
     "type": "payee_bank_account_number",
     "named": true
   },
@@ -618,7 +715,15 @@
     "named": true
   },
   {
-    "type": "payer_name",
+    "type": "payer_country_code",
+    "named": true
+  },
+  {
+    "type": "payer_info",
+    "named": true
+  },
+  {
+    "type": "payer_post_code",
     "named": true
   },
   {
