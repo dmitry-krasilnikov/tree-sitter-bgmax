@@ -10,7 +10,7 @@
 export default grammar({
   name: "bgmax",
 
-  externals: $ => [$.payee_plusgiro_number, $.reference],
+  externals: $ => [$.payee_plusgiro_number, $.reference, $.information_text, $.payer_name],
 
   rules: {
     // TODO: figure out if it's possible to handle ISO-8859-1 encoding
@@ -129,8 +129,21 @@ export default grammar({
       / {10}/
     ),
 
-    catch_all_lines: $ => repeat1(choice($.payment_record, $.deduction_record, $.extra_reference_number_record, $.catch_all)),
+    payment_information_record: $ => seq(
+      '25',
+      $.information_text,
+      / {28}/
+    ),
 
-    catch_all: $=> /2[4-9].{78}/
+    name_record: $ => seq(
+      '26',
+      field('payer_name', $.payer_name),
+      field('extra_name_field', $.payer_name),
+      / {8}/
+    ),
+
+    catch_all_lines: $ => repeat1(choice($.payment_record, $.deduction_record, $.extra_reference_number_record, $.payment_information_record, $.name_record, $.catch_all)),
+
+    catch_all: $=> /2[7-9].{78}/
   }
 });

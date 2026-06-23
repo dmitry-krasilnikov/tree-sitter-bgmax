@@ -20,6 +20,14 @@
           "named": true
         },
         {
+          "type": "name_record",
+          "named": true
+        },
+        {
+          "type": "payment_information_record",
+          "named": true
+        },
+        {
           "type": "payment_record",
           "named": true
         }
@@ -250,6 +258,32 @@
     }
   },
   {
+    "type": "name_record",
+    "named": true,
+    "fields": {
+      "extra_name_field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "payer_name",
+            "named": true
+          }
+        ]
+      },
+      "payer_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "payer_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "number_of",
     "named": true,
     "fields": {}
@@ -258,6 +292,21 @@
     "type": "payment_date",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "payment_information_record",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "information_text",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "payment_record",
@@ -493,6 +542,14 @@
     "named": false
   },
   {
+    "type": "25",
+    "named": false
+  },
+  {
+    "type": "26",
+    "named": false
+  },
+  {
     "type": "70",
     "named": false
   },
@@ -541,6 +598,10 @@
     "named": true
   },
   {
+    "type": "information_text",
+    "named": true
+  },
+  {
     "type": "layout_name",
     "named": true
   },
@@ -554,6 +615,10 @@
   },
   {
     "type": "payee_plusgiro_number",
+    "named": true
+  },
+  {
+    "type": "payer_name",
     "named": true
   },
   {

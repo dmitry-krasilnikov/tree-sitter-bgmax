@@ -5,6 +5,8 @@
 enum TokenType {
     PAYEE_PLUSGIRO_NUMBER,
     REFERENCE,
+    INFORMATION_TEXT,
+    PAYER_NAME,
 };
 
 void * tree_sitter_bgmax_external_scanner_create() {
@@ -42,6 +44,18 @@ bool tree_sitter_bgmax_external_scanner_scan(
             lexer->advance(lexer, false);
         }
         lexer->result_symbol = REFERENCE;
+        return true;
+    } else if (valid_symbols[INFORMATION_TEXT]) {
+        for (int i = 0; i < 50; i++) {
+            lexer->advance(lexer, false);
+        }
+        lexer->result_symbol = INFORMATION_TEXT;
+        return true;
+    } else if (valid_symbols[PAYER_NAME]) {
+        for (int i = 0; i < 35; i++) {
+            lexer->advance(lexer, false);
+        }
+        lexer->result_symbol = PAYER_NAME;
         return true;
     }
     return false;

@@ -456,6 +456,52 @@
         }
       ]
     },
+    "payment_information_record": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "25"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "information_text"
+        },
+        {
+          "type": "PATTERN",
+          "value": " {28}"
+        }
+      ]
+    },
+    "name_record": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "26"
+        },
+        {
+          "type": "FIELD",
+          "name": "payer_name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "payer_name"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "extra_name_field",
+          "content": {
+            "type": "SYMBOL",
+            "name": "payer_name"
+          }
+        },
+        {
+          "type": "PATTERN",
+          "value": " {8}"
+        }
+      ]
+    },
     "catch_all_lines": {
       "type": "REPEAT1",
       "content": {
@@ -475,6 +521,14 @@
           },
           {
             "type": "SYMBOL",
+            "name": "payment_information_record"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "name_record"
+          },
+          {
+            "type": "SYMBOL",
             "name": "catch_all"
           }
         ]
@@ -482,7 +536,7 @@
     },
     "catch_all": {
       "type": "PATTERN",
-      "value": "2[4-9].{78}"
+      "value": "2[7-9].{78}"
     }
   },
   "extras": [
@@ -501,6 +555,14 @@
     {
       "type": "SYMBOL",
       "name": "reference"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "information_text"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "payer_name"
     }
   ],
   "inline": [],
