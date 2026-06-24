@@ -110,7 +110,7 @@ export default grammar({
 
     single_digit_code: $ => /[0-9]{1}/,
 
-    long_numeric_field: $ => /[0-9]{12}/,
+    long_numeric_field: $ => /[A-Z0-9]{12}/,
 
     payment_record: $ => seq(
       '20',

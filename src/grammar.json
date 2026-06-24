@@ -417,7 +417,7 @@
     },
     "long_numeric_field": {
       "type": "PATTERN",
-      "value": "[0-9]{12}"
+      "value": "[A-Z0-9]{12}"
     },
     "payment_record": {
       "type": "SEQ",
